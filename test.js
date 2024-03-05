@@ -72,3 +72,36 @@ function twoSum(numbers, target) {
         }
     }
 }
+
+function orderType(arr) {
+    let decreasing = false;
+    let increasing = false;
+    let constant = false;
+    for(let i = 0; i < arr.length - 1; i++){
+      let value1 = typeof arr[i] === 'number' ? arr[i].toString() : arr[i];
+      let value2 = typeof arr[i + 1] === 'number' ? arr[i + 1].toString() : arr[i + 1];
+      if(value1.length < value2.length){
+        if(decreasing){
+          return 'Unsorted';
+        }
+        
+        increasing = true;
+      }
+      
+      if(value1.length > value2.length){
+        if(increasing){
+          return 'Unsorted';
+        }
+        
+        decreasing = true;
+      }
+      
+      if(value1.length === value2.length){
+        if(!(increasing || decreasing)){
+            constant = true;
+        }
+      }
+    }
+    
+    return increasing ? 'Increasing' : decreasing ? 'Decreasing' : 'Constant';
+}
